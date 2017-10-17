@@ -1,0 +1,17 @@
+Nome de usuário de FTP/Implantação
+image-process\fernandohlb
+
+Nome de host de FTP
+ftp://waws-prod-sn1-133.ftp.azurewebsites.windows.net
+
+Nomes de host de FTPS
+ftps://waws-prod-sn1-133.ftp.azurewebsites.windows.net
+
+
+NAME       ZONE           MACHINE_TYPE   PREEMPTIBLE  INTERNAL_IP  EXTERNAL_IP     STATUS
+
+gcedeploy  us-east4-a  n1-standard-1               10.150.0.2   35.188.255.96  RUNNING
+
+
+
+
