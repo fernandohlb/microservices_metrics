@@ -42,18 +42,15 @@ ADD supervisor.conf /etc/supervisor.conf
 
 #Faz o deploy da aplicação
 VOLUME /tmp
-ADD /app/imageProcess-0.0.1-SNAPSHOT.jar imageProcess.jar
+ADD imageProcess-0.0.1-SNAPSHOT.jar imageProcess.jar
 RUN sh -c 'touch /imageProcess.jar'
-COPY docker_services.sh /app/docker_services.sh
+
 
 # default command
 CMD ["supervisord", "-c", "/etc/supervisor.conf"]
 
 
 
-#CMD ["/bin/bash", "/app/docker_services.sh"]
-#CMD ["mongod"]
 
-#ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/imageProcess.jar"]
 
 

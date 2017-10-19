@@ -12,6 +12,16 @@ NAME       ZONE           MACHINE_TYPE   PREEMPTIBLE  INTERNAL_IP  EXTERNAL_IP  
 
 gcedeploy  us-east4-a  n1-standard-1               10.150.0.2   35.188.255.96  RUNNING
 
+sudo docker build -t imageprocess .
+
+//Docker
+curl -F file=@"linux-distros.jpg" http://35.188.255.96:8091/api/images/
+
+//Host
+curl -F file=@"linux-distros.jpg" http://35.194.85.4:8091/api/images/
+
+
+
 
 
 
