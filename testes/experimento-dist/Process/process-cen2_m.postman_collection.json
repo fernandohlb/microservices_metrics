@@ -1,0 +1,37 @@
+{
+	"info": {
+		"name": "exp2-process-cen2",
+		"_postman_id": "9ea2689e-484f-4bcd-050d-c3866563dd9a",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Process-Image",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://35.199.35.87:8091/api/images/process/5a10dc86c9e77c0001caca8a",
+					"protocol": "http",
+					"host": [
+						"35",
+						"199",
+						"35",
+						"87"
+					],
+					"port": "8091",
+					"path": [
+						"api",
+						"images",
+						"process",
+						"5a10dc86c9e77c0001caca8a"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

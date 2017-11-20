@@ -14,6 +14,15 @@ gcedeploy  us-east4-a  n1-standard-1               10.150.0.2   35.188.255.96  R
 
 sudo docker build -t imageprocess .
 
+sudo docker rm $(sudo docker ps -a -q)
+
+sudo docker build -t mongodb_split .
+
+docker network create imageprocess_net 
+
+
+
+
 //Docker
 curl -F file=@"linux-distros.jpg" http://35.188.255.96:8091/api/images/
 

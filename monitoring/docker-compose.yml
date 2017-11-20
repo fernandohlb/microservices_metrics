@@ -1,0 +1,29 @@
+version: '2.1'
+services:  
+  telegraf:
+    image: telegraf
+    hostname: telegraf
+    container_name: telegraf
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /data/telegraf/telegraf.conf:/etc/telegraf/telegraf.conf
+    labels:
+      - "traefik.enable=false"
+
+  influxdb:
+    image: influxdb
+    hostname: influxdb
+    container_name: influxdb
+    volumes:
+      - /data/influxdb:/var/lib/influxdb
+    labels:
+      - "traefik.enable=false"
+ 
+  grafana:
+    hostname: grafana
+    container_name: grafana
+    image: grafana/grafana
+    expose:
+      - 3000
+    volumes:
+      - /data/grafana:/var/lib/grafana

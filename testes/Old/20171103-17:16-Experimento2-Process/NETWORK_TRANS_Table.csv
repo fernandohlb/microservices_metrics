@@ -1,0 +1,5 @@
+﻿sep=;
+Metric;Current;Min;Max;Avg;
+cen2;542.00 kBps;0 Bps;542.00 kBps;255.96 kBps;
+cen3 app;482.08 MBps;3.19 kBps;482.08 MBps;229.89 MBps;
+cen3 db;80.66 MBps;7.65 kBps;80.66 MBps;38.71 MBps;

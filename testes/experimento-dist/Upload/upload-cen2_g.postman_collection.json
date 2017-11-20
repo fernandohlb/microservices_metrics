@@ -1,0 +1,46 @@
+{
+	"info": {
+		"name": "exp1-upload-cen2",
+		"_postman_id": "38e97469-7732-ff64-ba58-8c94b7dcb41a",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://35.199.35.87:8091/api/images",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"value": "",
+							"description": "",
+							"type": "file",
+                            "src": "../../imagens/imagen_g.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://35.199.35.87:8091/api/images",
+					"protocol": "http",
+					"host": [
+						"35",
+						"199",
+						"35",
+						"87"
+					],
+					"port": "8091",
+					"path": [
+						"api",
+						"images"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

@@ -1,21 +1,15 @@
 package br.com.buzatof.imageProcess.controller;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.gridfs.GridFsOperations;
-import org.springframework.data.mongodb.gridfs.GridFsResource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -44,18 +38,18 @@ public class ImageProcessController {
 	
     @PostMapping("/images")
     public String uploadFile(@RequestParam("file") MultipartFile imageFile) throws IOException{
-    	
+    	String id = "";
     	if (imageFile.isEmpty()) {
-            return "Por favor, selecione um Arquivo de Imagem!\n";
+            return "{\"status\":\"FILE-NOT-FOUND\",\"name\":\"\"\"id\":\"\"}\n";
         }
     	
     	try {
-            imageStorageService.store(imageFile.getOriginalFilename(),imageFile);			
+            id = imageStorageService.storeMultiPartFile(imageFile.getOriginalFilename(),imageFile);			
 		} catch (IOException e) {
-            return "Erro ao Gravar a Imagem na Base de Dados";
+            return "{\"status\":\"NOK\",\"name\":\"\"\"id\":\"\"}\n";
         }
 
-    	return "Upload realizado com sucesso - " + imageFile.getOriginalFilename() + "\n";
+    	return "{\"status\":\"OK\",\"name\":\"" + imageFile.getOriginalFilename() + "\",\"id\":\"" + id +"\"}\n";
     }
     
     
@@ -67,20 +61,28 @@ public class ImageProcessController {
 			file = imageStorageService.read(id);
 			
 	    	if (file == null) {
-	            return "Arquivo "+ id + "não encontrado\n";
+	            return "{\"status\":\"FILE-NOT-FOUND\",\"name\":\"\"\"id\":\"\"}\n";
 	        }
 	    	
 		} catch (IOException e1) {
-			return "Erro ao Ler a Imagem na Base de Dados\n";
+			return "{\"status\":\"NOK\",\"name\":\"\"\"id\":\"\"}\n";
 		}
     	
     	try {
-			imageProcessService.blur(file);
+			
+			String nameImageBlur = imageProcessService.renameFileToBlur(file.getFilename());
+			String contentType = file.getContentType();
+			
+			//Processa o Arquivo			
+			BufferedImage imageBlur = imageProcessService.blur(file);
+			
+			imageStorageService.storeBufferedImage(nameImageBlur, contentType, imageBlur);
+			
 		} catch (IOException e) {
-			return "Erro ao Processar a Imagem na Base de Dados\n";
+			return "{\"status\":\"PROCESS-NOK\",\"name\":\"\"\"id\":\"\"}\n";
 		}
     	
-    	return "Processamento do arquivo realizado com sucesso\n";
+    	return "{\"status\":\"OK\",\"name\":\"\"\"id\":\""+ id + "\"}\n";
     }
     
     
@@ -88,12 +90,12 @@ public class ImageProcessController {
     @GetMapping("/images/{id}")
 	public String retrieveImageFile(@PathVariable("id") String id) throws IOException{
 		// read file from MongoDB
-		GridFSDBFile imageFile = gridOperations.findOne(new Query(Criteria.where("_id").is(id)));
+		GridFSDBFile file = imageStorageService.read(id);
 		
 		// Save file back to local disk
-		imageFile.writeTo("out.png");
+		file.writeTo("out.png");
 		
-		System.out.println("Image File Name:" + imageFile.getFilename());
+		System.out.println("Image File Name:" + file.getFilename());
 		
 		return "Done";
 	}

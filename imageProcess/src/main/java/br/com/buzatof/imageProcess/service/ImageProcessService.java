@@ -3,16 +3,11 @@ package br.com.buzatof.imageProcess.service;
 import java.awt.image.BufferedImage;
 import java.awt.image.ConvolveOp;
 import java.awt.image.Kernel;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.regex.Pattern;
 
 import javax.imageio.ImageIO;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.gridfs.GridFsTemplate;
 import org.springframework.stereotype.Service;
 
 import com.mongodb.gridfs.GridFSDBFile;
@@ -23,20 +18,29 @@ public class ImageProcessService implements ImageProcessServiceInterface {
 	int MAX_KERNEL_LENGTH = 31;
 	int DELAY_BLUR = 100;
 
-	@Autowired
-	private GridFsTemplate gridFsTemplate;
 
 	@Override
-	public void blur(GridFSDBFile file) throws IOException {
+	public BufferedImage blur(GridFSDBFile file) throws IOException {
 		
 		BufferedImage image = ImageIO.read(file.getInputStream());
 		
 		image = getGaussianBlurFilter(4, true).filter(image, null);
 		image = getGaussianBlurFilter(2, false).filter(image, null);
 		
-		gridFsTemplate.store(bufferedImageToInputStream(image), renameFile(file.getFilename()),file.getContentType()).save();
+		return image;
 
 	}
+	
+	@Override
+	public String renameFileToBlur(String fileName) {
+		String[] strs = fileName.split(Pattern.quote("."));
+		String nomeArquivoOrig = strs[0];
+		String extArquivo = strs[1];
+
+		String novoNome = nomeArquivoOrig + "_blur." + extArquivo;
+
+		return novoNome;
+	}	
 
 	private static ConvolveOp getGaussianBlurFilter(int radius, boolean horizontal) {
 		if (radius < 1) {
@@ -71,24 +75,8 @@ public class ImageProcessService implements ImageProcessServiceInterface {
 		return new ConvolveOp(kernel, ConvolveOp.EDGE_NO_OP, null);
 	}
 
-	private String renameFile(String fileName) {
-		String[] strs = fileName.split(Pattern.quote("."));
-		String nomeArquivoOrig = strs[0];
-		String extArquivo = strs[1];
 
-		String novoNome = nomeArquivoOrig + "_blur." + extArquivo;
-
-		return novoNome;
-	}
 	
-	private static InputStream bufferedImageToInputStream (BufferedImage image) throws IOException {
-		ByteArrayOutputStream os = new ByteArrayOutputStream(); 
-		
-		ImageIO.write(image,"png", os); 
-		InputStream is = new ByteArrayInputStream(os.toByteArray());
-		
-		return is;
-	}
 
 	/*
 	 * private static Mat readInputStreamIntoMat(InputStream inputStream,int length)

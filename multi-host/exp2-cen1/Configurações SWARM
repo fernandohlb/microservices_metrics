@@ -1,0 +1,23 @@
+sudo docker swarm init --advertise-addr 10.150.0.5
+
+# Incluir os Works no cluster
+
+sudo docker network create nw1 --driver overlay
+
+sudo docker service create --replicas 3 --network nw1 -p 8091:8091/tcp -p 27017:27017/tcp --name imageprocess-exp2-cen1 imageprocess-exp2-cen1
+
+Configurar Cluster MongoDB
+
+ config = {
+  	"_id" : "rs0",
+  	"members" : [{"_id" : 0, "host" : "10.150.0.5:27017"}, {"_id" : 1, "host" : "10.150.0.6:27017"}, {"_id" : 2, "host" : "10.150.0.7:27017"}]
+        }
+
+rs.initiate(config)
+
+db2 = (new Mongo('10.150.0.6:27017')).getDB('image-process')
+
+db2.setSlaveOk()
+
+db3 = (new Mongo('10.150.0.7:27017')).getDB('image-process')
+db3.setSlaveOk()

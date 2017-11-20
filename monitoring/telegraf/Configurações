@@ -1,0 +1,17 @@
+GRAFANA
+
+sudo docker run -d -p 3000:3000 --name grafana --hostname grafana --net=monitoring_default grafana/grafana
+
+
+INFLUX DB
+
+sudo docker run --restart=always -d --name=influxdb --hostname=influxdb --net=monitoring_default -p 8083:8083 -p 8086:8086 -p 8090:8090 --expose 8083 --expose 8090 --expose 8099 influxdb:latest
+
+
+
+TELEGRAF
+
+docker run --rm telegraf -sample-config > telegraf.conf
+
+sudo docker run -d --restart=always --name=telegraf -e "HOST_PROC=/rootfs/proc" -e "HOST_SYS=/rootfs/sys" -e "HOST_ETC=/rootfs/etc" -v $(pwd)/telegraf.conf:/etc/telegraf/telegraf.conf:ro -v /var/run/docker.sock:/var/run/docker.sock:ro -v /sys:/rootfs/sys:ro -v /proc:/rootfs/proc:ro -v /etc:/rootfs/etc:ro telegraf
+

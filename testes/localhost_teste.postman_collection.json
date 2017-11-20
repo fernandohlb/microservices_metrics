@@ -1,0 +1,43 @@
+{
+	"info": {
+		"name": "localhost_teste",
+		"_postman_id": "e78b5ea6-f52f-4f90-6d32-65a978ac9f8b",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8091/api/images",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"value": "",
+							"description": "",
+							"type": "file",
+                            "src": "/home/buzatof/Desenvolvimento/GitProjects/microservices_metrics/linux-distros.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8091/api/images",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"api",
+						"images"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

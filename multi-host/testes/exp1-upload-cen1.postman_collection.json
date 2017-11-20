@@ -1,0 +1,46 @@
+{
+	"info": {
+		"name": "exp1-upload-cen1",
+		"_postman_id": "9a1992f7-d602-1a84-cf55-4450cd290b6c",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://35.194.67.242:8091/api/images",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"value": "",
+							"description": "",
+							"type": "file",
+                            "src": "/home/buzatof/Desenvolvimento/GitProjects/microservices_metrics/linux-distros.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://35.194.67.242:8091/api/images",
+					"protocol": "http",
+					"host": [
+						"35",
+						"194",
+						"67",
+						"242"
+					],
+					"port": "8091",
+					"path": [
+						"api",
+						"images"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

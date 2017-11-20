@@ -1,0 +1,5 @@
+﻿sep=;
+Metric;Current;Min;Max;Avg;
+cen2;740.45 MiB;204.41 MiB;740.45 MiB;487.79 MiB;
+cen3 app;201.89 MiB;158.62 MiB;202.00 MiB;192.36 MiB;
+cen3 db;525.33 MiB;32.01 MiB;525.33 MiB;285.39 MiB;
