@@ -1,0 +1,7 @@
+﻿Metric;Min;Max;Avg;
+Cenário 1 - Rcv;34.46 KiB;233.59 KiB;133.14 KiB;
+Cenário 1 - Trsf;90.95 KiB;386.98 KiB;237.42 KiB;
+Cenário 2 - app - Rcv;5.59 MiB;131.29 MiB;67.35 MiB;
+Cenário 2 - db - Rcv;24.00 MiB;798.77 MiB;400.81 MiB;
+Cenário 2 - app - Trsf;24.07 MiB;799.06 MiB;400.93 MiB;
+Cenário 2 - db - Trsf;5.56 MiB;131.13 MiB;67.25 MiB;

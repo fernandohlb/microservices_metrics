@@ -1,0 +1,7 @@
+﻿Metric;Min;Max;Avg;
+Cenário 1 - Read;97.38 MiB;97.38 MiB;97.38 MiB;
+Cenário 1 - Write;356.00 KiB;624.00 KiB;503.60 KiB;
+Cenário 2 - app - Read;56.60 MiB;56.60 MiB;56.60 MiB;
+Cenário 2 - db - Read;34.65 MiB;34.65 MiB;34.65 MiB;
+Cenário 2 - app - Write;4.00 KiB;4.00 KiB;4.00 KiB;
+Cenário 2 - db - Write;344.00 KiB;624.00 KiB;494.67 KiB;

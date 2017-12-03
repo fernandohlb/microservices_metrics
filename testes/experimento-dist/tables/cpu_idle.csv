@@ -1,0 +1,5 @@
+﻿sep=;
+Metric;Min;Max;Avg;
+Cenário 1;0.79%;1.46%;1.01%;
+Cenário 2 - app;0.27%;1.67%;0.52%;
+Cenário 2 - db;0.71%;0.93%;0.80%;

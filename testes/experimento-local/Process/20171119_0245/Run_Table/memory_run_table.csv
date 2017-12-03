@@ -1,0 +1,4 @@
+﻿Metric;Min;Max;Avg;
+Cenário 1;541.91 MiB;1.08 GiB;799.55 MiB;
+Cenário 2 - app;457.84 MiB;868.45 MiB;684.04 MiB;
+Cenário 2 - db;117.09 MiB;193.63 MiB;174.69 MiB;
